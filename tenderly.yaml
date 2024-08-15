@@ -1,0 +1,23 @@
+account_id: "radiant"
+actions:
+  radiant/radiant:
+    runtime: v2
+    sources: actions
+    specs:
+      riskOracle-bsc:
+        description: "Watch proposals to change a risk parameter"
+        execution_type: parallel
+        function: riskOracle_bsc:watchFn
+        trigger:
+          type: transaction
+          transaction:
+            status:
+              - mined
+            filters:
+              - network: 56
+                status: success
+                eventEmitted:
+                  contract:
+                    address: 0xcA12C01966ab3B7067C94013E1D231e391D685a4
+                  name: ParameterUpdated
+project_slug: "radiant"

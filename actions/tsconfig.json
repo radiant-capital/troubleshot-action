@@ -1,19 +1,16 @@
 {
-    "compileOnSave": true,
-    "compilerOptions": {
-        "module": "commonjs",
-        "noImplicitReturns": true,
-        "noUnusedLocals": true,
-        "outDir": "out",
-        "rootDir": "",
-        "sourceMap": true,
-        "strict": true,
-        "target": "es2020"
-    },
-    "exclude": [
-        "**/*.spec.ts"
-    ],
-    "include": [
-        "**/*"
-    ]
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es6",
+    "outDir": "out",
+    "rootDir": "",
+    "sourceMap": true,
+    "lib": ["es2015", "dom"],
+    "types": ["node"],
+    "strict": true,
+    "skipLibCheck": true
+  },
+  "include": ["**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

@@ -1,4 +1,4 @@
-import { ChainConfig } from "./types";
+import { ChainConfig, LendingPoolType } from "./types";
 
 export const RESERVE_FACTOR_TYPE =
   "0x7bc72ee4bd04451b3580b1e0b03f3f25aca8c380c59336d69c4988cfd3617c11"; // keccak256("ReserveFactor")
@@ -8,24 +8,48 @@ export const BNB_TEST_CONFIG: ChainConfig = {
   chainName: "Binance Smart Chain",
   signerSecret: "RISK_ORACLE_PROPOSER",
   rpcUrlSecret: "BSC_RPC_URL",
-  riskOracleAddr: "0x5c1A1085b61B47e949bA732099EA2914d482cc4A", // RiskOracle for testing
-  adminSafeAddr: "0x44bc0E36ef0e45FAe0f055337eFb552c6E7D9B6e", // adminSafe for testing
+  riskOracleAddr: "0xca12c01966ab3b7067c94013e1d231e391d685a4", // RiskOracle for testing
+  adminSafeAddr: "0x1792FCBAccE5c67c96cE781A4C77e449F551726B", // adminSafe for testing
   lendingPoolConfiguratorAddr: "0x71aE996454ef2229C8C9512D70b122226DEbe765",
   observables: [
     {
-      updateType: RESERVE_FACTOR_TYPE,
-      updateName: "Reserve Factor",
-      market:
-        "0x05006770566be06f5114357828eb5ddd65fbfc96dc3ecc7d2105072cc17ccc6c", // keccak256(rTokenAddr-USDC)
-      rTokenAddr: "0x3bDCEf9e656fD9D03eA98605946b4fbF362C342b",
       assetAddr: "0x8AC76a51cc950d9822D68b83fE1Ad97B32Cd580d",
       assetSymbol: "USDC",
+      lendingPoolType: LendingPoolType.CORE_V2,
+      market:
+        "0x2e07ab8730ced335f58fd4db08dc7cfcdd6482f230921ac9218e252963732a02", // keccak256(tokenAddress-USDC)
+      rTokenAddr: "0x3bDCEf9e656fD9D03eA98605946b4fbF362C342b",
+      updateName: "Reserve Factor",
+      updateType: RESERVE_FACTOR_TYPE,
+    },
+  ],
+} as const;
+
+export const ARB_TEST_CONFIG: ChainConfig = {
+  chainId: 42161,
+  chainName: "Arbitrum",
+  signerSecret: "RISK_ORACLE_PROPOSER",
+  rpcUrlSecret: "ARB_RPC_URL",
+  riskOracleAddr: "0x0d33160a6f4912c953c098fa169891f27eb16dfc", // RiskOracle for testing
+  adminSafeAddr: "arb1:0x99fDC09151000d6531A34af45e37A7b634D6e2e1", // adminSafe for testing
+  lendingPoolConfiguratorAddr: "0xe51dFE7188D0B9A84141ff47d04aB07aeB82B89D",
+  observables: [
+    {
+      assetAddr: "0xaf88d065e77c8cC2239327C5EDb3A432268e5831",
+      assetSymbol: "USDC",
+      lendingPoolType: LendingPoolType.CORE_V2,
+      market:
+        "0xb7da25363b87f26ed97405d909ff799fa027906d0d37a2f8ee2f5876defdaf9f", // keccak256(rTokenAddr-USDC)
+      rTokenAddr: "0x3a2d44e354f2d88EF6DA7A5A4646fd70182A7F55",
+      updateName: "Reserve Factor",
+      updateType: RESERVE_FACTOR_TYPE,
     },
   ],
 } as const;
 
 export const CONFIGS: { [key: string]: ChainConfig } = {
   bsc: BNB_TEST_CONFIG,
+  arbitrum: ARB_TEST_CONFIG,
 };
 
 export const RISK_ORACLE_ABI = [
